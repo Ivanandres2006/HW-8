@@ -102,9 +102,30 @@ public class Graph {
    * 
    */
   
-  public int findRoot() {
+    public int findRoot() {
+      int[] inDegree = new int[numVertices];
+      
+      for (int src = 0; src < numVertices; src++) {
+        for (Integer dest : adjListArr[src]) {
+          inDegree[dest]++;   
+        }
+      }
 
-    // ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOUR NAME/SECTION AT TOP OF FILE
-    return -1;
-  } 
+    
+      int rootIndex = -1;
+      int countRoots = 0;
+
+      for (int i = 0; i < numVertices; i++) {
+        if (inDegree[i] == 0) {
+          countRoots++;
+          rootIndex = i;
+        }
+      }
+
+      if (countRoots != 1) {
+        return -1;
+      }
+
+      return vertexValues.get(rootIndex);
+    }
 }
